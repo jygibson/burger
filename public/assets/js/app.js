@@ -22,8 +22,8 @@ $(function(){
         event.preventDefault();
 
         var newBurger = {
-            name: $("#bg").val().trim(),
-            sleepy: $("[burger_name=devoured]:checked").val().trim()
+            burger_name: $("#bg").val().trim(),
+            devoured: $("[name=devoured]:checked").val().trim()
         };
 
         $.ajax("/api/burgers", {
@@ -31,7 +31,7 @@ $(function(){
             data: newBurger
         }).then(
             function(){
-                console.log("crested new burger");
+                console.log("created new burger");
                 location.reload();
             }
         );
@@ -39,7 +39,7 @@ $(function(){
 
     $(".delete-burger").on("click", function(event){
         var id = $(this).data("id");
-        $.ajax("api/burgers/", + id, {
+        $.ajax("api/burgers", + id, {
             type: "DELETE"
         }).then(
             function(){
