@@ -38,14 +38,14 @@ $(function(){
     });
 
     $(".delete-burger").on("click", function(event){
+        event.preventDefault();
         var id = $(this).data("id");
-        $.ajax("api/burgers", + id, {
-            type: "DELETE"
+        $.ajax("/api/burgers", {
+            type: "DELETE",
+            id: id
         }).then(
             function(){
-                console.log("deleted burger", id);
+                console.log("deleted burger");
                 location.reload();
-            }
-        );
-    });
-});
+            })
+        })});

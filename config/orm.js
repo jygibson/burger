@@ -66,9 +66,9 @@ connection.query(queryString, vals, function(err, result){
 updateOne: function(table, objColVals, condition, cb){
     var queryString = "UPDATE " + table;
 
-    queryString += "SET";
+    queryString += " SET ";
     queryString += objToSql(objColVals);
-    queryString += "WHERE ";
+    queryString += " WHERE ";
     queryString += condition;
 
     console.log(queryString);
@@ -78,8 +78,19 @@ updateOne: function(table, objColVals, condition, cb){
         }
         cb(result)
     });
+},
+
+deleteOne: function(table, cb){
+    var queryString = "DELETE FROM " + table + " WHERE" + id;
+    console.log(queryString)
+    connection.query(queryString, function(err,result){
+        if (err){
+            throw err;
+        }
+        cb(result)
+    });
 }
-};
+}
 
  //  * Export the ORM object in `module.exports`.
  module.exports = orm;
