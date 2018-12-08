@@ -80,8 +80,8 @@ updateOne: function(table, objColVals, condition, cb){
     });
 },
 
-deleteOne: function(table, cb){
-    var queryString = "DELETE FROM " + table + " WHERE" + id;
+deleteOne: function(table, condition, cb){
+    var queryString = "DELETE FROM " + table + " WHERE " + condition;
     console.log(queryString)
     connection.query(queryString, function(err,result){
         if (err){

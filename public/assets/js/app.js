@@ -1,18 +1,16 @@
 $(function(){
     $(".change-eaten").on("click", function(event){
         var id = $(this).data("id");
-        var newDevoured = $(this).data("newdevoured");
-
-        var newEatenStatus = {
-            devoured: newDevoured
-        };
+        newValue = {
+            devoured: 1
+        }
 
         $.ajax("/api/burgers/" + id, {
-            type: "PUT",
-            data: newEatenStatus
+            method: "PUT",
+            data: newValue
         }).then(
             function(){
-                console.log("changed eaten to", newEatenStatus);
+                console.log("changed eaten to", newValue);
                 location.reload();
             }
         );
@@ -27,7 +25,7 @@ $(function(){
         };
 
         $.ajax("/api/burgers", {
-            type: "POST",
+            method: "POST",
             data: newBurger
         }).then(
             function(){
@@ -39,13 +37,15 @@ $(function(){
 
     $(".delete-burger").on("click", function(event){
         event.preventDefault();
-        var id = $(this).data("id");
-        $.ajax("/api/burgers", {
-            type: "DELETE",
-            id: id
+        var id = $(this).data("id");//this is calling the button
+        $.ajax("/api/burgers/" + id, {
+            method: "DELETE"
+            // id: id
         }).then(
             function(){
                 console.log("deleted burger");
                 location.reload();
-            })
+            }
+        );
+            //console log ID to make sure it's right
         })});
